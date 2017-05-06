@@ -1,10 +1,6 @@
 FROM buildpack-deps:jessie
 
 
-ARG PROTOBUF_CONFIGURE_OPTIONS=""
-ARG PROTOBUF_MAKE_J="2"
-
-
 ENV PROTOBUF_VERSION 3.3.0
 ENV PROTOBUF_DOWNLOAD_URL https://github.com/google/protobuf/archive/v3.3.0.tar.gz
 ENV PROTOBUF_DOWNLOAD_SHA256 94c414775f275d876e5e0e4a276527d155ab2d0da45eed6b7734301c330be36e
@@ -29,9 +25,9 @@ RUN set -ex \
   && cd /usr/src/protobuf \
   \
   && ./autogen.sh \
-  && ./configure ${PROTOBUF_CONFIGURE_OPTIONS} \
+  && ./configure \
   && make check \
-  && make -j${PROTOBUF_MAKE_J} \
+  && make \
   && make install \
   && ldconfig \
   && protoc --version \
