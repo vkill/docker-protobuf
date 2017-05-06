@@ -33,6 +33,8 @@ RUN set -ex \
   && make check \
   && make -j${PROTOBUF_MAKE_J} \
   && make install \
+  && ldconfig \
+  && protoc --version \
   \
   && apt-get purge -y --auto-remove $buildDeps \
   && cd / \
